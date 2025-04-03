@@ -18,7 +18,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".presentation.MainActivity"
             tools:ignore="Instantiatable"
             android:exported="true">
             <intent-filter>

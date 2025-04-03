@@ -1,11 +1,11 @@
-package nz.co.test.transactions.di.network
+package nz.co.test.transactions.data.di.network
 
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import nz.co.test.transactions.services.TransactionsService
+import nz.co.test.transactions.data.services.TransactionsService
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
