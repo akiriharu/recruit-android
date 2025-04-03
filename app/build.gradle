@@ -1,18 +1,25 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.navigation)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt.plugin)
 }
 
 android {
-    compileSdk 34
+    compileSdk 35
+
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
         applicationId "nz.co.test.transactions"
         minSdk 28
-        targetSdk 34
+        targetSdk 35
         versionCode 1
         versionName "1.0"
 
@@ -35,36 +42,74 @@ android {
             jvmTarget.set(JvmTarget.JVM_1_8)
         }
     }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
     namespace 'nz.co.test.transactions'
 }
 
 dependencies {
 
-    def dagger_version = '2.51.1'
+    implementation libs.dagger.hilt.android
+    implementation libs.androidx.junit.ktx
+    ksp libs.hilt.compiler
+    implementation (libs.hilt.navigation.compose)
 
-    implementation "com.google.dagger:dagger:${dagger_version}"
-    kapt "com.google.dagger:dagger-compiler:${dagger_version}"
+    implementation libs.dagger
+    ksp libs.dagger.compiler
 
-    implementation "com.google.dagger:dagger-android:${dagger_version}"
-    implementation "com.google.dagger:dagger-android-support:${dagger_version}"
-    kapt "com.google.dagger:dagger-android-processor:${dagger_version}"
+    implementation libs.dagger.android
+    implementation libs.dagger.android.support
+    ksp libs.dagger.android.processor
 
-    def kotlin_version = '2.0.0'
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.13.1'
-    implementation 'androidx.appcompat:appcompat:1.7.0'
-    implementation 'com.google.android.material:material:1.12.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation libs.kotlin.stdlib
+    implementation libs.core.ktx
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.constraintlayout
 
-    def fragment_version = '1.8.0'
-    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+    implementation libs.fragment.ktx
 
-    def retrofit_version = '2.11.0'
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    implementation libs.retrofit
+    implementation libs.retrofit.moshi
+    implementation libs.moshi.kotlin
 
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation libs.coroutines.android
+    implementation libs.coroutines.core
+    implementation libs.coroutines.test
+
+    //Testing libraries
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+
+    testImplementation libs.ext.junit
+    testImplementation libs.espresso.core
+    testImplementation libs.mockito.android
+    testImplementation libs.mockito.inline
+    testImplementation libs.mockito.kotlin
+    testImplementation libs.truth
+
+
+    //Compose
+    implementation platform(libs.compose.bom)
+    implementation libs.ui
+    implementation libs.androidx.material
+    debugImplementation libs.androidx.ui.tooling
+    implementation libs.androidx.ui.tooling.preview
+    implementation libs.androidx.activity.compose
+    implementation libs.androidx.ui.viewbinding
+    androidTestImplementation platform(libs.compose.bom)
+    androidTestImplementation libs.androidx.ui.test.junit4
+    testImplementation platform(libs.compose.bom)
+    testImplementation libs.androidx.ui.test.junit4
+    implementation libs.androidx.runtime
+    implementation libs.androidx.runtime.livedata
+    implementation libs.androidx.runtime.rxjava2
+    implementation libs.androidx.runtime.rxjava3
+    implementation libs.androidx.foundation
 }
