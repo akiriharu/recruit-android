@@ -15,8 +15,7 @@ import org.mockito.Mockito.mock
 import org.mockito.kotlin.reset
 import org.mockito.kotlin.whenever
 import java.math.BigDecimal
-import java.time.OffsetDateTime
-import java.time.ZoneOffset
+import java.time.LocalDateTime
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -28,34 +27,16 @@ class TransactionsRepositoryImplTest {
 
     private val transaction1 = Transaction(
         id = 1,
-        transactionDate = OffsetDateTime.of(
-            2022,
-            11,
-            5,
-            8,
-            45,
-            12,
-            0,
-            ZoneOffset.ofHours(1)
-        ),
+        transactionDate = LocalDateTime.of(2025, 1, 15, 14, 36),
         summary = "Summary 1",
         debit = BigDecimal.valueOf(3456),
         credit = BigDecimal.ZERO,
     )
 
     private val transaction2 = Transaction(
-        id = 1,
-        transactionDate = OffsetDateTime.of(
-            2024,
-            1,
-            20,
-            18,
-            19,
-            0,
-            0,
-            ZoneOffset.ofHours(1)
-        ),
-        summary = "Summary 1",
+        id = 2,
+        transactionDate = LocalDateTime.of(2024, 7, 29, 5, 16),
+        summary = "Summary 2",
         debit = BigDecimal.ZERO,
         credit = BigDecimal.valueOf(2345.6),
     )
