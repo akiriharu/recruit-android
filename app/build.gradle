@@ -53,6 +53,9 @@ android {
 
 dependencies {
 
+    //Timber logging
+    implementation libs.timber
+
     implementation libs.dagger.hilt.android
     implementation libs.androidx.junit.ktx
     ksp libs.hilt.compiler
@@ -94,6 +97,8 @@ dependencies {
     testImplementation libs.coroutines.test
     // Truth Testing Dependency
     testImplementation libs.truth
+    // Turbine Library Dependency
+    testImplementation libs.turbine
 
 
     //Compose
