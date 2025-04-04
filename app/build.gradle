@@ -12,10 +12,6 @@ plugins {
 android {
     compileSdk 35
 
-    buildFeatures {
-        buildConfig = true
-    }
-
     defaultConfig {
         applicationId "nz.co.test.transactions"
         minSdk 28
@@ -25,7 +21,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    buildFeatures {
+        compose true
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -36,19 +34,21 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.7.5"
+    }
     kotlin {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
+    namespace 'nz.co.test.transactions'
 
     testOptions {
-        unitTests {
-            includeAndroidResources = true
+        unitTests.all {
+            useJUnitPlatform()
         }
     }
-    namespace 'nz.co.test.transactions'
 }
 
 dependencies {
@@ -81,15 +81,18 @@ dependencies {
     //Testing libraries
     testImplementation libs.junit
 
+    // JUnit 5 Core Dependencies
     testImplementation libs.junit.jupiter.api
     testImplementation libs.junit.jupiter.engine
     testImplementation libs.junit.jupiter.params
 
     testImplementation libs.ext.junit
     testImplementation libs.espresso.core
-    testImplementation libs.mockito.android
     testImplementation libs.mockito.inline
     testImplementation libs.mockito.kotlin
+    // Kotlin Coroutines Testing Dependency
+    testImplementation libs.coroutines.test
+    // Truth Testing Dependency
     testImplementation libs.truth
 
 
