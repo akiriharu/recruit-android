@@ -51,20 +51,20 @@ fun TransactionListItemView(
             Row {
                 Text(
                     text = transaction.summary,
-                    modifier = modifier
+                    modifier = Modifier
                         .padding(8.dp)
                         .testTag(TRANSACTIONS_LIST_ITEM_VIEW_SUMMARY),
                     style = MaterialTheme.typography.h6
                 )
             }
             Row {
-                Column(modifier = modifier.weight(1f)) {
+                Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = stringResource(
                             id = R.string.transaction_date,
                             transaction.transactionDate
                         ),
-                        modifier = modifier
+                        modifier = Modifier
                             .padding(8.dp)
                             .testTag(TRANSACTIONS_LIST_ITEM_VIEW_TRANSACTION_DATE),
                         style = MaterialTheme.typography.subtitle1
@@ -73,7 +73,7 @@ fun TransactionListItemView(
                 Column {
                     Text(
                         text = transaction.amount,
-                        modifier = modifier
+                        modifier = Modifier
                             .padding(8.dp)
                             .testTag(TRANSACTIONS_LIST_ITEM_VIEW_AMOUNT),
                         color = defineAmountColour(transaction.amountType),

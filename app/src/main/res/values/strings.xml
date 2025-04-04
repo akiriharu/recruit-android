@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Transactions</string>
     <string name="transaction_date">Date: %1$s</string>
+    <string name="no_transactions">No transaction available</string>
 </resources>
