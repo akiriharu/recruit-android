@@ -10,6 +10,9 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import nz.co.test.transactions.domain.entity.TransactionExtended
 import nz.co.test.transactions.domain.usecase.GetTransactionsListUseCase
+import nz.co.test.transactions.presentation.model.AmountType
+import nz.co.test.transactions.presentation.model.UITransaction
+import nz.co.test.transactions.presentation.model.mapper.UITransactionMapper
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -28,6 +31,7 @@ class TransactionsViewModelTest {
     private lateinit var underTest: TransactionsViewModel
 
     private val getTransactionsListUseCase = mock<GetTransactionsListUseCase>()
+    private val uiTransactionMapper = mock<UITransactionMapper>()
 
     private val extendedTransaction1 = TransactionExtended(
         id = 1,
@@ -51,10 +55,33 @@ class TransactionsViewModelTest {
 
     private val extendedTransactionsList = listOf(extendedTransaction1, extendedTransaction2)
 
+    private val uiTransaction1 = UITransaction(
+        id = 1,
+        summary = "Summary 1",
+        transactionDate = "29/07/24 05:16",
+        amount = "+$2345.60",
+        amountType = AmountType.CREDIT,
+        gst = "351.84"
+    )
+
+    private val uiTransaction2 = UITransaction(
+        id = 2,
+        summary = "Summary 2",
+        transactionDate = "15/01/25 14:36",
+        amount = "-$3456.00",
+        amountType = AmountType.DEBIT,
+        gst = "518.40"
+    )
+
+    private val uiTransactionList = listOf(uiTransaction1, uiTransaction2)
+
     @BeforeEach
     fun setUp() {
         Dispatchers.setMain(UnconfinedTestDispatcher())
-        reset(getTransactionsListUseCase)
+        reset(
+            getTransactionsListUseCase,
+            uiTransactionMapper,
+            )
     }
 
     @AfterEach
@@ -63,17 +90,22 @@ class TransactionsViewModelTest {
     }
 
     private fun initViewModel() {
-        underTest = TransactionsViewModel(getTransactionsListUseCase)
+        underTest = TransactionsViewModel(
+            getTransactionsListUseCase,
+            uiTransactionMapper,
+        )
     }
 
     @Test
-    fun `test that list of transactions is successfully fetched`() = runTest {
+    fun `test that list of transactions is successfully fetched and mapped`() = runTest {
         whenever(getTransactionsListUseCase()).thenReturn(extendedTransactionsList)
+        whenever(uiTransactionMapper.invoke(extendedTransaction1)).thenReturn(uiTransaction1)
+        whenever(uiTransactionMapper.invoke(extendedTransaction2)).thenReturn(uiTransaction2)
 
         initViewModel()
 
         underTest.state.test {
-            assertThat(awaitItem().transactionsList).isEqualTo(extendedTransactionsList)
+            assertThat(awaitItem().transactionsList).isEqualTo(uiTransactionList)
         }
     }
 

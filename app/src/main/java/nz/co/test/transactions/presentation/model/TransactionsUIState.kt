@@ -1,4 +1,4 @@
-package nz.co.test.transactions.presentation
+package nz.co.test.transactions.presentation.model
 
 import nz.co.test.transactions.domain.entity.TransactionExtended
 
@@ -8,5 +8,5 @@ import nz.co.test.transactions.domain.entity.TransactionExtended
  * @property transactionsList The list of transactions
  */
 data class TransactionsUIState(
-    val transactionsList: List<TransactionExtended> = emptyList(),
+    val transactionsList: List<UITransaction> = emptyList(),
 )
