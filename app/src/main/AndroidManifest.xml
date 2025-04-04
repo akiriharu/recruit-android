@@ -26,6 +26,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Declare Component Activity for Instrumented Tests -->
+        <activity
+            android:name="androidx.activity.ComponentActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>
