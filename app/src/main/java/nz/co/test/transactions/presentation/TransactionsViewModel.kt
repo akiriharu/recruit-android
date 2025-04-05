@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import nz.co.test.transactions.domain.usecase.GetTransactionsListUseCase
 import nz.co.test.transactions.presentation.model.TransactionsUIState
+import nz.co.test.transactions.presentation.model.UITransaction
 import nz.co.test.transactions.presentation.model.mapper.UITransactionMapper
 import timber.log.Timber
 import javax.inject.Inject
@@ -41,5 +42,9 @@ class TransactionsViewModel @Inject constructor(
                 Timber.e("Failed to fetch list of transactions: ${it.message}")
             }
         }
+    }
+
+    fun onTransactionSelected(transaction: UITransaction) {
+        _state.update { it.copy(selectedTransaction = transaction) }
     }
 }

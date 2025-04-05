@@ -18,6 +18,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.assertDoesNotThrow
+import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.reset
 import org.mockito.kotlin.whenever
@@ -99,8 +100,8 @@ class TransactionsViewModelTest {
     @Test
     fun `test that list of transactions is successfully fetched and mapped`() = runTest {
         whenever(getTransactionsListUseCase()).thenReturn(extendedTransactionsList)
-        whenever(uiTransactionMapper.invoke(extendedTransaction1)).thenReturn(uiTransaction1)
-        whenever(uiTransactionMapper.invoke(extendedTransaction2)).thenReturn(uiTransaction2)
+        whenever(uiTransactionMapper(extendedTransaction1)).thenReturn(uiTransaction1)
+        whenever(uiTransactionMapper(extendedTransaction2)).thenReturn(uiTransaction2)
 
         initViewModel()
 
@@ -117,6 +118,19 @@ class TransactionsViewModelTest {
 
         underTest.state.test {
             assertThat(awaitItem().transactionsList).isEmpty()
+        }
+    }
+
+    @Test
+    fun `test that selectedTransaction is updated in ui state`() = runTest {
+        whenever(getTransactionsListUseCase()).thenReturn(extendedTransactionsList)
+        whenever(uiTransactionMapper(any())).thenReturn(uiTransaction1)
+        initViewModel()
+
+        underTest.onTransactionSelected(uiTransaction1)
+
+        underTest.state.test {
+            assertThat(awaitItem().selectedTransaction).isEqualTo(uiTransaction1)
         }
     }
 }

@@ -36,7 +36,7 @@ fun TransactionListItemView(
     Card(
         modifier = modifier
             .fillMaxSize()
-            .padding(4.dp)
+            .padding(vertical = 4.dp)
             .border(
                 width = 2.dp,
                 color = Color.Gray,

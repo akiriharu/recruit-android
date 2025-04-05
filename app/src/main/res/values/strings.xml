@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Transactions</string>
     <string name="transaction_date">Date: %1$s</string>
-    <string name="no_transactions">No transaction available</string>
-    <string name="transaction_gst">GST: %1$s</string>
+    <string name="no_transactions">Transactions loading…</string>
+    <string name="transaction_gst">GST: $%1$s</string>
+    <string name="top_app_bar_title_transactions">Transactions</string>
+    <string name="top_app_bar_title_transaction_details">Transaction Details</string>
 </resources>

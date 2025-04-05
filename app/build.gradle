@@ -105,6 +105,7 @@ dependencies {
     implementation platform(libs.compose.bom)
     implementation libs.ui
     implementation libs.androidx.material
+    implementation libs.material.icons.extended
     debugImplementation libs.androidx.ui.tooling
     implementation libs.androidx.ui.tooling.preview
     implementation libs.androidx.activity.compose
@@ -118,4 +119,5 @@ dependencies {
     implementation libs.androidx.runtime.rxjava2
     implementation libs.androidx.runtime.rxjava3
     implementation libs.androidx.foundation
+
 }

@@ -27,6 +27,7 @@ class NetworkModule {
     @Singleton
     fun providesMoshi(): Moshi {
         return Moshi.Builder()
+            .add(BigDecimalStringAdapter())
             .add(LocalDateTimeAdapter())
             .add(KotlinJsonAdapterFactory())
             .build()
