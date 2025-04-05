@@ -47,4 +47,11 @@ class TransactionsViewModel @Inject constructor(
     fun onTransactionSelected(transaction: UITransaction) {
         _state.update { it.copy(selectedTransaction = transaction) }
     }
+
+    fun saveScrollPosition(newScrollPosition: Int) {
+        val currentScrollPosition = _state.value.savedScrollPosition
+        if (currentScrollPosition != newScrollPosition) {
+            _state.update { it.copy(savedScrollPosition = newScrollPosition) }
+        }
+    }
 }

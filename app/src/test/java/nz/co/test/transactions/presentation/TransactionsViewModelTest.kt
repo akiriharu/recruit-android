@@ -133,4 +133,18 @@ class TransactionsViewModelTest {
             assertThat(awaitItem().selectedTransaction).isEqualTo(uiTransaction1)
         }
     }
+
+    @Test
+    fun `test that scroll position for transaction list is saved`() = runTest {
+        val scrollState = 100
+        whenever(getTransactionsListUseCase()).thenReturn(extendedTransactionsList)
+        whenever(uiTransactionMapper(any())).thenReturn(uiTransaction1)
+        initViewModel()
+
+        underTest.saveScrollPosition(scrollState)
+
+        underTest.state.test {
+            assertThat(awaitItem().savedScrollPosition).isEqualTo(scrollState)
+        }
+    }
 }

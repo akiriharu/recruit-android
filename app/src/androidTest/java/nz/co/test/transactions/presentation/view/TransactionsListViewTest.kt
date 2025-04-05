@@ -31,7 +31,9 @@ class TransactionsListViewTest {
         composeRule.setContent {
             TransactionsListView(
                 transactionsList = listOf(transaction1, transaction2, transaction3),
-                onTransactionTap = {}
+                savedScrollPosition = 1,
+                onTransactionTap = {},
+                onScrollPositionChanged = {}
             )
         }
 
@@ -49,7 +51,9 @@ class TransactionsListViewTest {
         composeRule.setContent {
             TransactionsListView(
                 transactionsList = listOf(transaction1, transaction2, transaction3),
-                onTransactionTap = { tapped.value = true }
+                savedScrollPosition = 1,
+                onTransactionTap = { tapped.value = true },
+                onScrollPositionChanged = {}
             )
         }
 

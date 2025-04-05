@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                                     }
                                 }
                             },
-                            modifier = Modifier.height(64.dp)
+                            modifier = Modifier.height(68.dp)
                         )
                     },
                 ) { innerPadding ->
@@ -81,11 +81,13 @@ class MainActivity : AppCompatActivity() {
                     ) {
                         composable(transactionsListRoute) {
                             TransactionsListView(
-                                uiState.transactionsList,
+                                transactionsList = uiState.transactionsList,
+                                savedScrollPosition = uiState.savedScrollPosition,
                                 onTransactionTap = {
                                     viewModel.onTransactionSelected(it)
                                     navController.navigate(transactionDetailsRoute)
                                 },
+                                onScrollPositionChanged = viewModel::saveScrollPosition
                             )
                         }
                         composable(transactionDetailsRoute) {

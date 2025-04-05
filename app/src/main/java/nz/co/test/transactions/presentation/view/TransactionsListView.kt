@@ -7,15 +7,20 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
 import nz.co.test.transactions.R
 import nz.co.test.transactions.presentation.model.AmountType
 import nz.co.test.transactions.presentation.model.UITransaction
@@ -25,8 +30,27 @@ import nz.co.test.transactions.presentation.theme.TransactionAppTheme
 @Composable
 internal fun TransactionsListView(
     transactionsList: List<UITransaction>,
-    onTransactionTap: (UITransaction) -> Unit
+    savedScrollPosition: Int,
+    onTransactionTap: (UITransaction) -> Unit,
+    onScrollPositionChanged: (Int) -> Unit,
 ) {
+    val lazyListState = rememberLazyListState()
+    val currentFirstVisibleItem = remember {
+        derivedStateOf { lazyListState.firstVisibleItemIndex }
+    }
+
+    // Update to new scroll position when it changes
+    LaunchedEffect(savedScrollPosition) {
+        if (savedScrollPosition >= 0) {
+            lazyListState.animateScrollToItem(savedScrollPosition)
+        }
+    }
+    // New scroll position is sae after delay
+    LaunchedEffect(currentFirstVisibleItem.value) {
+        delay(500)
+        onScrollPositionChanged(currentFirstVisibleItem.value)
+    }
+
     if (transactionsList.isEmpty()) {
         Box(
             modifier = Modifier
@@ -44,7 +68,7 @@ internal fun TransactionsListView(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 8.dp),
-            state = LazyListState(),
+            state = lazyListState,
             verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
             items(transactionsList) { transaction ->
@@ -83,7 +107,9 @@ fun TransactionsListViewPreview() {
     TransactionAppTheme {
         TransactionsListView(
             transactionsList = listOf(transaction1, transaction2),
-            onTransactionTap = {}
+            savedScrollPosition = 1,
+            onTransactionTap = {},
+            onScrollPositionChanged = {},
         )
     }
 }
