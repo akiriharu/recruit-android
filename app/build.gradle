@@ -109,15 +109,11 @@ dependencies {
     debugImplementation libs.androidx.ui.tooling
     implementation libs.androidx.ui.tooling.preview
     implementation libs.androidx.activity.compose
-    implementation libs.androidx.ui.viewbinding
     androidTestImplementation platform(libs.compose.bom)
     androidTestImplementation libs.androidx.ui.test.junit4
     testImplementation platform(libs.compose.bom)
     testImplementation libs.androidx.ui.test.junit4
     implementation libs.androidx.runtime
-    implementation libs.androidx.runtime.livedata
-    implementation libs.androidx.runtime.rxjava2
-    implementation libs.androidx.runtime.rxjava3
     implementation libs.androidx.foundation
 
 }

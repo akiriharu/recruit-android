@@ -68,7 +68,7 @@ class TransactionDetailsViewTest {
 
     @Test
     fun testThatGstIsShownCorrectly() {
-        val expectedGST = "GST: 15"
+        val expectedGST = "GST: $15"
         setContent()
 
         composeRule.onNodeWithTag(TRANSACTION_DETAILS_VIEW_GST, useUnmergedTree = true)
