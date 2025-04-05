@@ -1,6 +1,5 @@
 package nz.co.test.transactions.presentation.model
 
-import androidx.compose.ui.graphics.Color
 
 /**
  * UI model for a transaction.

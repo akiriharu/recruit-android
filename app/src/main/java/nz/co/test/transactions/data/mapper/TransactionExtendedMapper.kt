@@ -5,6 +5,10 @@ import nz.co.test.transactions.domain.entity.TransactionExtended
 import java.math.BigDecimal
 import javax.inject.Inject
 
+/**
+ * Mapper to map Transaction data class to TransactionExtended
+ * including calculating GST
+ */
 class TransactionExtendedMapper @Inject constructor() {
 
     internal operator fun invoke(transaction: Transaction): TransactionExtended = TransactionExtended(
@@ -17,6 +21,9 @@ class TransactionExtendedMapper @Inject constructor() {
         isDebit = transaction.debit.signum() != 0
     )
 
+    /**
+     * Function to calculate GST for credit and debit
+     */
     private fun calculateGst(transaction: Transaction): BigDecimal =
         if (transaction.credit.signum() == 0)
             transaction.debit.multiply(BigDecimal(GST))

@@ -11,6 +11,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
+/**
+ * NetworkModule provides network-related dependencies using Dagger Hilt.
+ * Supplies a singleton Retrofit instance configured with Moshi for JSON parsing.
+ * Provides the TransactionsService interface for API communication.
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {

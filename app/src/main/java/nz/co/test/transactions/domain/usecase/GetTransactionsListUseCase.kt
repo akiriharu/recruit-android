@@ -14,6 +14,11 @@ import javax.inject.Inject
 class GetTransactionsListUseCase @Inject constructor(
     private val transactionsRepository: TransactionsRepository
 ) {
+    /**
+     *  Invoke
+     *
+     *  @return [List<TransactionExtended>]
+     */
     suspend operator fun invoke(): List<TransactionExtended> =
         transactionsRepository.fetchTransactions().sortedByDescending { it.transactionDate }
 }

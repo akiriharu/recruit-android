@@ -27,6 +27,9 @@ import java.math.BigDecimal
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
+/**
+ * Compose view to display individual item of the transactions' list
+ */
 @Composable
 fun TransactionListItemView(
     modifier: Modifier = Modifier,
@@ -85,6 +88,9 @@ fun TransactionListItemView(
     }
 }
 
+/**
+ * Function to define colour for each type of transaction
+ */
 @Composable
 private fun defineAmountColour(type: AmountType): Color = when(type) {
     AmountType.CREDIT -> LocalCustomColours.current.customCreditColor
@@ -109,7 +115,9 @@ fun TransactionListItemViewPreview() {
     }
 }
 
-
+/**
+ * constants for test tags
+ */
 const val TRANSACTIONS_LIST_ITEM_VIEW_CARD = "transactions_list_item_view:card"
 const val TRANSACTIONS_LIST_ITEM_VIEW_SUMMARY = "transactions_list_item_view:text_summary"
 const val TRANSACTIONS_LIST_ITEM_VIEW_TRANSACTION_DATE = "transactions_list_item_view:text_transaction_date"

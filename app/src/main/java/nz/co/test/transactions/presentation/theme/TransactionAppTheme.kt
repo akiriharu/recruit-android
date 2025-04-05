@@ -5,6 +5,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 
+/**
+ * Application default theme
+ */
 @Composable
 fun TransactionAppTheme(
     content: @Composable () -> Unit,

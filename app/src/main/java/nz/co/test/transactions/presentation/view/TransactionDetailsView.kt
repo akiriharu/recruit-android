@@ -24,6 +24,9 @@ import java.math.BigDecimal
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
+/**
+ * Compose view to display details of individual transaction
+ */
 @Composable
 fun TransactionDetailsView(
     transaction: UITransaction,
@@ -73,6 +76,9 @@ fun TransactionDetailsView(
     }
 }
 
+/**
+ * Function to define colour for each type of transaction
+ */
 @Composable
 private fun defineAmountColour(type: AmountType): Color = when (type) {
     AmountType.CREDIT -> LocalCustomColours.current.customCreditColor
@@ -97,7 +103,9 @@ fun TransactionDetailsViewPreview() {
     }
 }
 
-
+/**
+ * constants for test tags
+ */
 const val TRANSACTION_DETAILS_VIEW_SUMMARY = "transaction_details_view:text_summary"
 const val TRANSACTION_DETAILS_VIEW_AMOUNT = "transaction_details_view:text_amount"
 const val TRANSACTION_DETAILS_VIEW_TRANSACTION_DATE =

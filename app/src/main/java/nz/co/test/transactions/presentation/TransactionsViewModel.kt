@@ -18,6 +18,7 @@ import javax.inject.Inject
  * View model to handle Transactions-related operations
  *
  * @param getTransactionsListUseCase use case to fetch list of transactions (extended)
+ * @param uiTransactionMapper mapper for TransactionExtended to be mapped to UITransaction
  *
  * @property state Current UI state
  */
@@ -44,10 +45,16 @@ class TransactionsViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Function to update UI state when user tap on transaction
+     */
     fun onTransactionSelected(transaction: UITransaction) {
         _state.update { it.copy(selectedTransaction = transaction) }
     }
 
+    /**
+     * function to update UI state to save scroll position
+     */
     fun saveScrollPosition(newScrollPosition: Int) {
         val currentScrollPosition = _state.value.savedScrollPosition
         if (currentScrollPosition != newScrollPosition) {

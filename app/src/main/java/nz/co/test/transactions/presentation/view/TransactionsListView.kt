@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -27,6 +26,9 @@ import nz.co.test.transactions.presentation.model.UITransaction
 import nz.co.test.transactions.presentation.theme.CombinedThemePreviews
 import nz.co.test.transactions.presentation.theme.TransactionAppTheme
 
+/**
+ * Compose view to show list of transactions
+ */
 @Composable
 internal fun TransactionsListView(
     transactionsList: List<UITransaction>,
@@ -114,4 +116,7 @@ fun TransactionsListViewPreview() {
     }
 }
 
+/**
+ * constants for test tags
+ */
 const val  TRANSACTIONS_LIST_VIEW_ITEM = "transactions_list_view:transactions_list_item_"

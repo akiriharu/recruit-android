@@ -3,7 +3,6 @@ package nz.co.test.transactions.data.repository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import nz.co.test.transactions.data.services.TransactionsService
-import nz.co.test.transactions.data.entity.Transaction
 import nz.co.test.transactions.data.mapper.TransactionExtendedMapper
 import nz.co.test.transactions.domain.entity.TransactionExtended
 import nz.co.test.transactions.domain.qualifier.IoDispatcher

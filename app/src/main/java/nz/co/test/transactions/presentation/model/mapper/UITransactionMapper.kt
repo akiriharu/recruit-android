@@ -14,9 +14,10 @@ class UITransactionMapper @Inject constructor() {
     /**
      * Invoke
      * Convert the TransactionExtended to UITransaction
+     * to prepare the data class being consumed by UI
      *
      * @param transaction The extended transaction to map
-     * @return The mapped UITransaction
+     * @return  [UITransaction]
      */
     internal operator fun invoke(
         transaction: TransactionExtended
