@@ -1,6 +1,6 @@
 package nz.co.test.transactions.domain.repository
 
-import nz.co.test.transactions.domain.entity.Transaction
+import nz.co.test.transactions.domain.entity.TransactionExtended
 
 /**
  * The repository related to operations for Transactions
@@ -11,5 +11,5 @@ interface TransactionsRepository {
      *
      * @return Transactions' list
      */
-    suspend fun fetchTransactions(): List<Transaction>
+    suspend fun fetchTransactions(): List<TransactionExtended>
 }

@@ -1,4 +1,4 @@
-package nz.co.test.transactions.domain.entity
+package nz.co.test.transactions.data.entity
 
 import java.math.BigDecimal
 import java.time.LocalDateTime

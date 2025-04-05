@@ -2,7 +2,6 @@ package nz.co.test.transactions.domain.usecase
 
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
-import nz.co.test.transactions.domain.entity.Transaction
 import nz.co.test.transactions.domain.entity.TransactionExtended
 import nz.co.test.transactions.domain.repository.TransactionsRepository
 import org.junit.jupiter.api.BeforeAll
@@ -22,45 +21,28 @@ class GetTransactionsListUseCaseTest {
 
     private val transactionsRepository = mock<TransactionsRepository>()
 
-    private val transaction1 = Transaction(
+    private val extendedTransaction1 = TransactionExtended(
         id = 1,
         transactionDate = LocalDateTime.of(2025, 1, 15, 14, 36),
         summary = "Summary 1",
         debit = BigDecimal.valueOf(3456),
         credit = BigDecimal.ZERO,
+        gst = BigDecimal.valueOf(3456).multiply(BigDecimal(0.15)),
+        isDebit = true
     )
 
-    private val transaction2 = Transaction(
+    private val extendedTransaction2 = TransactionExtended(
         id = 2,
         transactionDate = LocalDateTime.of(2024, 7, 29, 5, 16),
         summary = "Summary 2",
         debit = BigDecimal.ZERO,
         credit = BigDecimal.valueOf(2345.6),
-    )
-
-    private val transactionsList = listOf(transaction1, transaction2)
-
-    private val extendedTransaction1 = TransactionExtended(
-        id = transaction1.id,
-        transactionDate = transaction1.transactionDate,
-        summary = transaction1.summary,
-        debit = transaction1.debit,
-        credit = transaction1.credit,
-        gst = transaction1.debit.multiply(BigDecimal(0.15)),
-        isDebit = true
-    )
-
-    private val extendedTransaction2 = TransactionExtended(
-        id = transaction2.id,
-        transactionDate = transaction2.transactionDate,
-        summary = transaction2.summary,
-        debit = transaction2.debit,
-        credit = transaction2.credit,
-        gst = transaction2.credit.multiply(BigDecimal(0.15)),
+        gst = BigDecimal.valueOf(2345.6).multiply(BigDecimal(0.15)),
         isDebit = false
     )
 
-    private val extendedTransactionsList = listOf(extendedTransaction1, extendedTransaction2)
+    private val initialTransactionsList = listOf(extendedTransaction2, extendedTransaction1)
+    private val expectedTransactionsList = listOf(extendedTransaction1, extendedTransaction2)
 
     @BeforeAll
     fun setUp() {
@@ -74,8 +56,8 @@ class GetTransactionsListUseCaseTest {
 
     @Test
     fun `test that list of extended and sorted transactions is fetched`() = runTest {
-        whenever(transactionsRepository.fetchTransactions()).thenReturn(transactionsList)
+        whenever(transactionsRepository.fetchTransactions()).thenReturn(initialTransactionsList)
 
-        assertThat(underTest()).isEqualTo(extendedTransactionsList)
+        assertThat(underTest()).isEqualTo(expectedTransactionsList)
     }
 }
