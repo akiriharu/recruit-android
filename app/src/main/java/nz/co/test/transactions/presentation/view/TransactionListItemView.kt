@@ -101,7 +101,7 @@ fun TransactionListItemViewPreview() {
                 summary = "Transaction summary",
                 transactionDate = OffsetDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yy HH:mm")),
                 amount = "+$${ BigDecimal(100) }",
-                amountType = AmountType.DEBIT,
+                amountType = AmountType.CREDIT,
                 gst = BigDecimal.ONE.toString(),
             ),
             onTransactionTap = {}
