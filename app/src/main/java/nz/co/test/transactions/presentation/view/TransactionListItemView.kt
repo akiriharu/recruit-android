@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import nz.co.test.transactions.R
 import nz.co.test.transactions.presentation.model.AmountType
@@ -41,8 +40,8 @@ fun TransactionListItemView(
             .fillMaxSize()
             .padding(vertical = 4.dp)
             .border(
-                width = 2.dp,
-                color = Color.Gray,
+                width = 1.dp,
+                color = Color.Transparent,
                 shape = RoundedCornerShape(12.dp)
             )
             .clickable(
@@ -70,7 +69,7 @@ fun TransactionListItemView(
                         modifier = Modifier
                             .padding(8.dp)
                             .testTag(TRANSACTIONS_LIST_ITEM_VIEW_TRANSACTION_DATE),
-                        style = MaterialTheme.typography.subtitle1
+                        style = MaterialTheme.typography.body1
                     )
                 }
                 Column {
@@ -80,7 +79,7 @@ fun TransactionListItemView(
                             .padding(8.dp)
                             .testTag(TRANSACTIONS_LIST_ITEM_VIEW_AMOUNT),
                         color = defineAmountColour(transaction.amountType),
-                        style = MaterialTheme.typography.subtitle1.copy(fontWeight = FontWeight.Bold)
+                        style = MaterialTheme.typography.h6
                     )
                 }
             }

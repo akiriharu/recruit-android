@@ -71,7 +71,7 @@ internal fun TransactionsListView(
                 .fillMaxSize()
                 .padding(horizontal = 8.dp),
             state = lazyListState,
-            verticalArrangement = Arrangement.spacedBy(2.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(transactionsList) { transaction ->
                 TransactionListItemView(

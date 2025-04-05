@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import nz.co.test.transactions.R
 import nz.co.test.transactions.presentation.model.AmountType
@@ -34,9 +33,8 @@ fun TransactionDetailsView(
     Card(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 10.dp),
     ) {
-        Column(modifier = Modifier.padding(start = 18.dp, end = 18.dp)) {
+        Column(modifier = Modifier.padding(18.dp)) {
             Text(
                 text = transaction.summary,
                 modifier = Modifier
@@ -52,7 +50,7 @@ fun TransactionDetailsView(
                             .padding(end = 8.dp)
                             .testTag(TRANSACTION_DETAILS_VIEW_AMOUNT),
                         color = defineAmountColour(transaction.amountType),
-                        style = MaterialTheme.typography.h6.copy(fontWeight = FontWeight.Bold),
+                        style = MaterialTheme.typography.h6,
                     )
                 }
                 Column {
